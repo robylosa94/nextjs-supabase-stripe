@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
 
         try {
           const { data, error } = await resend.emails.send({
-            from: "onboarding@resend.dev",
+            from: "no-reply@robylosa.dev",
             to: customerEmail,
             subject: "Benvenuto!",
             react: <WelcomeEmail name={customerName} />,
