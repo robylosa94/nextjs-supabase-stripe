@@ -36,7 +36,7 @@ async function Pricing() {
             and capital can unlock long-term value and drive economic growth.
           </p>
         </div>
-        <div className="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
+        <div className="space-y-8 sm:gap-6 xl:gap-10 lg:space-y-0">
           <div className="flex flex-col p-6 mx-auto max-w-lg text-center text-white bg-gray-800 rounded-lg border border-gray-600 shadow xl:p-8">
             <h3 className="mb-4 text-2xl font-semibold">Lifetime membership</h3>
             <p className="font-light text-gray-400 sm:text-lg">
