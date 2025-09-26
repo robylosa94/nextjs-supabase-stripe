@@ -17,7 +17,7 @@ export async function handleSubscribe(formData: FormData) {
       },
     ],
     allow_promotion_codes: true,
-    mode: "subscription",
+    mode: "payment",
     success_url: `${getURL()}/confirm?success=true&session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${getURL()}/confirm?success=false`,
   });
