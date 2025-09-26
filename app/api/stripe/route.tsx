@@ -26,15 +26,15 @@ export async function POST(req: NextRequest) {
   try {
     // Handle the event
     switch (event.type) {
-      case "invoice.payment_succeeded":
-        const paymentInvoiceSucceeded = event.data.object;
+      case "charge.succeeded":
+        const chargeSucceeded = event.data.object;
         const customerEmail =
-          paymentInvoiceSucceeded.customer_email || "roby94.losa@tiscali.it";
+          chargeSucceeded.billing_details.email || "roby94.losa@tiscali.it";
 
         const { error } = await supabaseAdmin.from("subscriptions").upsert(
           {
             email: customerEmail,
-            stripeid: paymentInvoiceSucceeded.customer as string,
+            stripeid: chargeSucceeded.customer as string,
           },
           { onConflict: "email" }
         );
@@ -43,8 +43,7 @@ export async function POST(req: NextRequest) {
           return NextResponse.json({ ok: false }, { status: 500 });
         }
 
-        const customerName =
-          paymentInvoiceSucceeded.customer_name || "robylosa";
+        const customerName = chargeSucceeded.billing_details.name || "robylosa";
 
         try {
           const { data, error } = await resend.emails.send({
