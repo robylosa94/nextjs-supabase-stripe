@@ -1,10 +1,29 @@
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { handleSubscribe } from "../../../action";
+import { createClient } from "@/utils/supabase/server";
 
 const priceId = process.env.NEXT_PUBLIC_PRICE_ID;
 
-const Pricing = () => {
+async function Pricing() {
+  const supabaseClient = await createClient();
+  const user = await supabaseClient.auth.getUser();
+  const userEmail = user.data.user?.email;
+
+  let hasActiveSub = false;
+  if (userEmail) {
+    const { error } = await supabaseClient
+      .from("subscriptions")
+      .select()
+      .eq("email", userEmail)
+      .eq("active", true)
+      .single();
+
+    if (!error) {
+      hasActiveSub = true;
+    }
+  }
+
   return (
     <section id="pricing" className="bg-gray-900">
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
@@ -56,17 +75,19 @@ const Pricing = () => {
                 </span>
               </li>
             </ul>
-            <form action={handleSubscribe}>
-              <input name="price" value={priceId} hidden readOnly />
-              <Button variant="secondary" type="submit">
-                Get access
-              </Button>
-            </form>
+            {!hasActiveSub && (
+              <form action={handleSubscribe}>
+                <input name="price" value={priceId} hidden readOnly />
+                <Button variant="secondary" type="submit">
+                  Get access
+                </Button>
+              </form>
+            )}
           </div>
         </div>
       </div>
     </section>
   );
-};
+}
 
 export default Pricing;
