@@ -24,7 +24,7 @@ const Pricing = () => {
               Best option for personal use & for your next project.
             </p>
             <div className="flex justify-center items-baseline my-8">
-              <span className="mr-2 text-5xl font-extrabold">€1</span>
+              <span className="mr-2 text-5xl font-extrabold">€0,01</span>
               <span className="text-gray-400"></span>
             </div>
             <ul role="list" className="mb-8 space-y-4 text-left">
