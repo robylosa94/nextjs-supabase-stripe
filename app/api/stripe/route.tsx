@@ -34,7 +34,7 @@ export async function POST(req: NextRequest) {
         const { error } = await supabaseAdmin.from("subscriptions").upsert(
           {
             email: customerEmail,
-            stripeid: chargeSucceeded.customer as string,
+            stripeid: chargeSucceeded.payment_intent as string,
           },
           { onConflict: "email" }
         );
