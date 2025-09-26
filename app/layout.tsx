@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "SaaS - robylosa",
   description:
-    "Web application built with Next.js that seamlessly integrates user authentication using Supabase and payment processing through Strapi.",
+    "Web application built with Next.js that seamlessly integrates user authentication using Supabase and payment processing through Stripe.",
 };
 
 export default function RootLayout({
